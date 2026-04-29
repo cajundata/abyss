@@ -32,7 +32,13 @@ Abyss is a local-first Go + Wails v2 desktop password and key vault for macOS an
   4. User can generate a configurable password (length 24 default, classes/exclude-ambiguous toggles), copy it with a visible countdown progress bar, and save it as a credential.
   5. Locking the vault clears the in-memory DEK, decrypted record state, and best-effort clipboard contents (verified by Go test); locked vault rejects all secret-touching API calls with `VAULT_LOCKED`.
   6. App builds and runs on the primary dev OS, AND a Windows build smoke-test succeeds at end of phase (per PRD §2.3 cross-OS verification).
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 01-01-storage-migrations-PLAN.md — Wails v2 scaffold + modernc.org/sqlite + golang-migrate + 5-table schema + application_id + CI baseline
+- [ ] 01-02-crypto-scaffolding-PLAN.md — internal/aad with golden vectors + AES-GCM + Argon2id + apperr + session lock-state with DEK zero + logger + math/rand forbidigo gate
+- [ ] 01-03-wails-api-frontend-shell-PLAN.md — 14 Wails methods + vault.Service Create/Open/Unlock/Lock + frontend api wrappers + Zustand stores + 6 screens + vault:locked event + bindings no-drift gate
+- [ ] 01-04-credential-crud-passgen-clipboard-PLAN.md — credential CRUD with AAD encrypt/decrypt + forward-compat metadata blob + crypto/rand passgen + clipboard countdown + SQLite no-plaintext gate
+- [ ] 01-05-ci-gates-windows-smoke-PLAN.md — CI-gate audit script + D-09 dual-OS lifecycle smoke from release builds + Phase 1 minimal README + verification log
 **UI hint**: yes
 
 **Notes for plan-phase researcher:**
