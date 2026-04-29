@@ -32,6 +32,24 @@ created: 2026-04-29
 
 ---
 
+## Focal Points (per primary screen)
+
+Explicit visual anchor per Phase 1 screen. The executor MUST ensure these elements are the dominant focal point on their respective screens — no competing elements at the same visual weight.
+
+| Screen | Primary anchor | Secondary anchor |
+|--------|----------------|------------------|
+| Welcome | Display-size wordmark `Abyss` (28px / 600 / `<Title order={1}>`) is the hero anchor. | `Create new vault` primary CTA below the wordmark — the only filled accent button on the screen. |
+| Create Vault | Heading `Create your vault` + the master-password field group as one functional anchor. | `Create vault` filled CTA at the bottom of the form. |
+| Unlock | `Master password` input (auto-focused on mount) is the functional anchor. | `Unlock vault` filled CTA directly beneath. |
+| Vault Home | Search input + record list is the functional focal point of the screen. | Lock-state pill in the top-right header is the secondary informational anchor (always visible, never primary). |
+| Record Detail | Record `{title}` heading + the masked-password row are the joint anchors (the row the user came here to act on). | Per-field copy `<ActionIcon>` buttons on each field. |
+| New / Edit Record | Heading (`New credential` / `Edit credential`) + the `Title*` field (auto-focused) form the entry anchor. | `Save credential` filled CTA at the bottom of the form. |
+| Password Generator | Generated output field (monospace, prominently sized) is the hero anchor. | `Copy` filled CTA — the action the user came here for. |
+
+Lock-state pill is always present on Vault Home / Record Detail / New-Edit-Record / Password Generator headers but is **never** the primary anchor — it is informational only.
+
+---
+
 ## Spacing Scale
 
 Declared values (strict 8-point scale; overrides Mantine's default 10/12/16/20/32 via `theme.spacing`):
@@ -56,16 +74,18 @@ Declared values (strict 8-point scale; overrides Mantine's default 10/12/16/20/3
 
 ## Typography
 
-Locked 4-step ramp; overrides Mantine's default 5-step ramp via `theme.fontSizes` and `theme.headings`. System font stack throughout.
+Locked 4-step ramp; overrides Mantine's default 5-step ramp via `theme.fontSizes` and `theme.headings`. System font stack throughout. Visual hierarchy is created by **size + color (dimming)**, not by weight permutations.
 
 | Role | Size | Weight | Line Height | Mantine usage |
 |------|------|--------|-------------|----------------|
-| Label | 14px | 500 (medium) | 1.4 | `<Text size="sm" fw={500}>` — form labels, field hints, masked-secret captions, badge text |
+| Label | 14px | 600 (semibold) | 1.4 | `<Text size="sm" fw={600}>` for emphasized labels; `<Text size="sm" c="dimmed">` for secondary/helper text. Form labels, field hints, masked-secret captions, badge text. Color-dimming (`c="dimmed"`) — not weight — provides the secondary-text contrast |
 | Body | 16px | 400 (regular) | 1.5 | `<Text>` default — record list rows, detail field values, modal body, error messages |
 | Heading | 22px | 600 (semibold) | 1.3 | `<Title order={2}>` — screen headers (e.g., "Vault Home", "Create Vault"), record-detail title, modal titles |
-| Display | 28px | 700 (bold) | 1.2 | `<Title order={1}>` — Welcome screen wordmark / hero only. Used **once per screen** at most |
+| Display | 28px | 600 (semibold) | 1.2 | `<Title order={1}>` — Welcome screen wordmark / hero only. Used **once per screen** at most. 28px at semibold reads as the hero; tabular-nums and tracking unchanged |
 
-**Locked weights: 400 + 600 + 700.** No 300/500-only families needed; system stack supplies all three.
+**Locked weights: 400 (regular) + 600 (semibold). No other weights are permitted in Phase 1.**
+
+Rationale for the 2-weight cap: hierarchy comes from size (14 / 16 / 22 / 28) and color dimming (`c="dimmed"`), not from weight juggling. Two weights keeps the system readable on both macOS SF and Windows Segoe UI without fallback weight rendering inconsistencies.
 
 **Monospace exception:** Generated-secret display fields (password generator output, masked-secret reveal, copy-target value) use `font-family: ui-monospace, SF Mono, Consolas, monospace` at 16px / 400 / 1.5. This is the only deviation from the system sans stack and is mandatory — secrets MUST render in a fixed-width font so the user can visually verify character ambiguity (`O` vs `0`, `l` vs `1`).
 
@@ -87,7 +107,7 @@ Phase 1 uses Mantine's semantic surface tokens (auto light/dark via `defaultColo
 | Lock-state OFF (unlocked, exposed) | `#FAB005` (`yellow.6`) | `#FCC419` (`yellow.5`) | Vault status header pill when unlocked: open-shield icon + "Unlocked" label. Read as "secrets currently in memory — caution" |
 
 **Accent reserved for (explicit list — never "all interactive elements"):**
-1. Primary CTA on each screen (`<Button variant="filled" color="blue">`): "Create Vault", "Unlock", "Save", "Generate", "Copy"
+1. Primary CTA on each screen (`<Button variant="filled" color="blue">`): "Create vault", "Unlock vault", "Save credential", "Generate again", "Copy"
 2. Active route in nav / selected record row in list
 3. Focus ring outline on all focusable elements (Mantine `focusRing="auto"` uses primary color)
 4. Clipboard countdown progress-bar fill while seconds > 5
@@ -150,7 +170,7 @@ Copy strings marked **(PRD-LOCKED)** are verbatim from `docs/PRD.md` and MUST NO
 | "Open a different vault" link | `Open a different vault` |
 | Master password field label | `Master password` |
 | **Required generic failure (PRD-LOCKED)** | `Unable to unlock vault. Check your master password and try again.` |
-| Primary CTA | `Unlock` |
+| Primary CTA | `Unlock vault` |
 | Path-no-longer-exists banner (info, not error) | `This vault is no longer at this path. Open a different one.` |
 
 **Frontend MUST render this exact unlock-failure string for ANY `AppErrorCode` returned by `UnlockVault` that is not `VAULT_ALREADY_UNLOCKED` or `UNSUPPORTED_VAULT`.** The frontend MUST NOT display the `AppErrorDTO.message` field on the unlock screen — only the locked string above. (PRD §9.4 + §10.1 + §18 hard rule #14.) `UNSUPPORTED_VAULT` and `CORRUPT_VAULT` get distinct error banners (see Error State Map below) because those are not "wrong password" — they are file-identity failures.
@@ -185,7 +205,7 @@ Copy strings marked **(PRD-LOCKED)** are verbatim from `docs/PRD.md` and MUST NO
 | Per-field copy button (icon-only, copy) | aria-label `Copy {field}` |
 | Edit button | `Edit` |
 | Delete button | `Delete` |
-| Edit-on-Detail behavior (D-19 resolved) | Click `Edit` → fields become editable in-place; CTA row swaps to `Save` + `Cancel`. No separate Edit screen route. (Smaller, clearer mental model for credential-only Phase 1.) |
+| Edit-on-Detail behavior (D-19 resolved) | Click `Edit` → fields become editable in-place; CTA row swaps to `Save credential` + `Cancel`. No separate Edit screen route. (Smaller, clearer mental model for credential-only Phase 1.) |
 
 **Reveal interaction (D-19 resolved):** Click-to-toggle, NOT hold-to-reveal. Auto-hide after **30 seconds** of being revealed (matches default clipboard timeout — same exposure budget). On lock event, all revealed fields collapse immediately. Rationale: hold-to-reveal is fragile on touchpads + Wails WebView2 mouse-event model varies between OSes; click-to-toggle is reliable cross-platform and lets the user re-read the password.
 
@@ -199,7 +219,7 @@ Copy strings marked **(PRD-LOCKED)** are verbatim from `docs/PRD.md` and MUST NO
 | Title required hint | `Required` |
 | Tags input placeholder | `Add a tag and press Enter` |
 | "Generate" inline button next to password field | `Generate` (opens generator inline; result populates field) |
-| Primary CTA | `Save` |
+| Primary CTA | `Save credential` (used in both new and edit modes — heading copy disambiguates) |
 | Cancel link | `Discard changes` |
 | Discard confirm modal title | `Discard unsaved changes?` |
 | Discard confirm modal body | `Your changes will not be saved.` |
@@ -387,7 +407,7 @@ These are the locked interaction rules. Plan and executor consume directly.
 | Welcome "View security limitations" = minimal modal listing PRD §4.4 three points | UI-SPEC resolution of CONTEXT specifics §1 |
 | All PRD-LOCKED copy strings | `docs/PRD.md` §9.3, §9.4, §9.7, §9.8 |
 | Spacing 8-point scale override | UI-SPEC default (Mantine's 10/12/16/20/32 default does not satisfy gsd 4-multiple rule) |
-| Typography 4-step ramp override | UI-SPEC default (Mantine's 5-step default exceeds gsd 3-4-size rule) |
+| Typography 4-step ramp + 2-weight cap | UI-SPEC default (Mantine's 5-step default exceeds gsd 3-4-size rule; 2-weight cap enforces gsd typography rule) |
 | Tabler icons | UI-SPEC default (Mantine-idiomatic, MIT, tree-shakable) |
 | `@mantine/notifications` for toasts | `CLAUDE.md` §1 supporting libraries table |
 | `<ScrollArea>` for cross-engine scrollbar consistency | UI-SPEC default (cross-platform polish) |
