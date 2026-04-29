@@ -1,10 +1,11 @@
 ---
 phase: 1
 slug: v0-1-dogfoodable-vault
-status: draft
+status: approved
 shadcn_initialized: false
 preset: not applicable
 created: 2026-04-29
+reviewed_at: 2026-04-29
 ---
 
 # Phase 1 — UI Design Contract
