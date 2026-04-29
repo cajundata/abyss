@@ -250,18 +250,144 @@ Explicitly excluded. PRD §3.3, §18 Hard Rules, plus PRD §2 architectural lock
 
 ## Traceability
 
-Phase mapping is populated during roadmap creation by `gsd-roadmapper`.
+Each v1 REQ-ID maps to exactly one phase. Phases derive from PRD §15 milestones (v0.1 → v1.0). Status reflects current execution state.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| _(populated by roadmapper)_ | _-_ | Pending |
+| VAULT-01 | Phase 1 | Pending |
+| VAULT-02 | Phase 1 | Pending |
+| VAULT-03 | Phase 1 | Pending |
+| VAULT-04 | Phase 1 | Pending |
+| VAULT-05 | Phase 1 | Pending |
+| VAULT-06 | Phase 1 | Pending |
+| VAULT-07 | Phase 1 | Pending |
+| VAULT-08 | Phase 2 | Pending |
+| VAULT-09 | Phase 2 | Pending |
+| VAULT-10 | Phase 1 | Pending |
+| VAULT-11 | Phase 1 | Pending |
+| VAULT-12 | Phase 1 | Pending |
+| VAULT-13 | Phase 5 | Pending |
+| REC-01 | Phase 1 | Pending |
+| REC-02 | Phase 3 | Pending |
+| REC-03 | Phase 3 | Pending |
+| REC-04 | Phase 3 | Pending |
+| REC-05 | Phase 4 | Pending |
+| REC-06 | Phase 1 | Pending |
+| REC-07 | Phase 1 | Pending |
+| REC-08 | Phase 1 | Pending |
+| REC-09 | Phase 1 | Pending |
+| REC-10 | Phase 1 | Pending |
+| REC-11 | Phase 1 | Pending |
+| REC-12 | Phase 1 | Pending |
+| REC-13 | Phase 1 | Pending |
+| PASS-01 | Phase 1 | Pending |
+| PASS-02 | Phase 1 | Pending |
+| PASS-03 | Phase 1 | Pending |
+| PASS-04 | Phase 1 | Pending |
+| PASS-05 | Phase 1 | Pending |
+| PASS-06 | Phase 1 | Pending |
+| PASS-07 | Phase 6 | Pending |
+| AES-01 | Phase 4 | Pending |
+| AES-02 | Phase 4 | Pending |
+| AES-03 | Phase 4 | Pending |
+| AES-04 | Phase 4 | Pending |
+| AES-05 | Phase 4 | Pending |
+| AES-06 | Phase 4 | Pending |
+| AES-07 | Phase 4 | Pending |
+| RSA-01 | Phase 4 | Pending |
+| RSA-02 | Phase 4 | Pending |
+| RSA-03 | Phase 4 | Pending |
+| RSA-04 | Phase 4 | Pending |
+| RSA-05 | Phase 4 | Pending |
+| RSA-06 | Phase 4 | Pending |
+| RSA-07 | Phase 4 | Pending |
+| RSA-08 | Phase 4 | Pending |
+| ED-01 | Phase 4 | Pending |
+| ED-02 | Phase 4 | Pending |
+| ED-03 | Phase 4 | Pending |
+| ED-04 | Phase 4 | Pending |
+| ED-05 | Phase 4 | Pending |
+| ED-06 | Phase 4 | Pending |
+| ED-07 | Phase 4 | Pending |
+| ED-08 | Phase 4 | Pending |
+| CLIP-01 | Phase 1 | Pending |
+| CLIP-02 | Phase 1 | Pending |
+| CLIP-03 | Phase 1 | Pending |
+| CLIP-04 | Phase 1 | Pending |
+| CLIP-05 | Phase 1 | Pending |
+| CLIP-06 | Phase 2 | Pending |
+| CLIP-07 | Phase 6 | Pending |
+| API-01 | Phase 1 | Pending |
+| API-02 | Phase 1 | Pending |
+| API-03 | Phase 1 | Pending |
+| API-04 | Phase 1 | Pending |
+| API-05 | Phase 4 | Pending |
+| API-06 | Phase 1 | Pending |
+| API-07 | Phase 4 | Pending |
+| API-08 | Phase 1 | Pending |
+| API-09 | Phase 1 | Pending |
+| UI-01 | Phase 1 | Pending |
+| UI-02 | Phase 1 | Pending |
+| UI-03 | Phase 1 | Pending |
+| UI-04 | Phase 1 | Pending |
+| UI-05 | Phase 1 | Pending |
+| UI-06 | Phase 4 | Pending |
+| UI-07 | Phase 1 | Pending |
+| UI-08 | Phase 4 | Pending |
+| UI-09 | Phase 6 | Pending |
+| UI-10 | Phase 6 | Pending |
+| UI-11 | Phase 1 | Pending |
+| UI-12 | Phase 4 | Pending |
+| UI-13 | Phase 1 | Pending |
+| SEC-01 | Phase 1 | Pending |
+| SEC-02 | Phase 2 | Pending |
+| SEC-03 | Phase 1 | Pending |
+| SEC-04 | Phase 1 | Pending |
+| SEC-05 | Phase 1 | Pending |
+| SEC-06 | Phase 1 | Pending |
+| SEC-07 | Phase 1 | Pending |
+| SEC-08 | Phase 1 | Pending |
+| SEC-09 | Phase 1 | Pending |
+| SEC-10 | Phase 2 | Pending |
+| STORE-01 | Phase 1 | Pending |
+| STORE-02 | Phase 1 | Pending |
+| STORE-03 | Phase 1 | Pending |
+| STORE-04 | Phase 1 | Pending |
+| STORE-05 | Phase 1 | Pending |
+| STORE-06 | Phase 1 | Pending |
+| STORE-07 | Phase 1 | Pending |
+| STORE-08 | Phase 1 | Pending |
+| XPLAT-01 | Phase 5 | Pending |
+| XPLAT-02 | Phase 5 | Pending |
+| XPLAT-03 | Phase 5 | Pending |
+| XPLAT-04 | Phase 5 | Pending |
+| XPLAT-05 | Phase 5 | Pending |
+| TEST-01 | Phase 2 | Pending |
+| TEST-02 | Phase 6 | Pending |
+| DOC-01 | Phase 6 | Pending |
+| DOC-02 | Phase 6 | Pending |
+| DOC-03 | Phase 6 | Pending |
+| DOC-04 | Phase 6 | Pending |
+| DOC-05 | Phase 6 | Pending |
 
 **Coverage:**
-- v1 requirements: 113 total
+- v1 requirements: 115 total (corrected from preliminary 113 count during roadmap creation; PASS-07 and CLIP-07 were undercounted)
 - v2 requirements: 6 total
 - Out of scope: 28 categorical exclusions
-- Mapped to phases: _(populated by roadmapper)_
+- Mapped to phases: 115 / 115 (100%)
+
+**Per-phase requirement count:**
+
+| Phase | Count | Theme |
+|-------|-------|-------|
+| Phase 1 — v0.1 Dogfoodable Vault | 61 | Vault core, credential records, password generator, clipboard countdown, ALL security scaffolding |
+| Phase 2 — v0.2 Security Foundation | 6 | Auto-lock, change master password, KDF benchmark, memory hygiene, full Go test pass |
+| Phase 3 — v0.3 Expanded Record Types | 3 | API key, secure note, symmetric key record types |
+| Phase 4 — v0.4 Key Generation and Export | 29 | AES/RSA/Ed25519 generators, asymmetric records, public/private key export, warning modal |
+| Phase 5 — v0.5 Cross-Platform Hardening | 6 | macOS+Windows verification, lock-on-system-sleep, packaging notes |
+| Phase 6 — v1.0 MVP Complete | 10 | Frontend tests, README threat model, Settings/About screens, password strength meter |
+| **Total** | **115** | |
 
 ---
 *Requirements defined: 2026-04-29*
-*Last updated: 2026-04-29 after initialization (auto mode from docs/PRD.md v1.2)*
+*Last updated: 2026-04-29 after roadmap creation; traceability populated by `gsd-roadmapper`.*
